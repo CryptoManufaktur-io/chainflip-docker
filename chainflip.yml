@@ -14,6 +14,8 @@ services:
       - ./keys:/etc/chainflip/keys
       - ./config:/etc/chainflip/config
       - /etc/localtime:/etc/localtime:ro
+    ports:
+      - ${NODE_P2P_PORT:-30333}:${NODE_P2P_PORT:-30333}/tcp
     entrypoint:
       - /usr/local/bin/chainflip-node
       - --chain
@@ -24,6 +26,13 @@ services:
       - /etc/chainflip/keys/node_key_file
       - --validator
       - --prometheus-external
+      - --port
+      - ${NODE_P2P_PORT:-30333}
+      - --unsafe-ws-external
+      - --unsafe-rpc-external
+      - --rpc-cors=*
+      - --sync
+      - fast
 
   engine:
     restart: "unless-stopped"
@@ -40,7 +49,7 @@ services:
       - ./config:/etc/chainflip/config
       - /etc/localtime:/etc/localtime:ro
     ports:
-      - 8078:8078/tcp
+      - ${ENGINE_P2P_PORT:-8078}:${ENGINE_P2P_PORT:-8078}/tcp
     entrypoint:
       - /usr/local/bin/chainflip-engine
       - --config-root
