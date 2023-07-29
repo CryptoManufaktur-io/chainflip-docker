@@ -40,7 +40,7 @@ services:
       - ./config:/etc/chainflip/config
       - /etc/localtime:/etc/localtime:ro
     environment:
-      - RUST_LOG="chainflip_engine=debug,multisig=debug,warn,chainflip_engine::p2p=error"
+      - RUST_LOG="multisig=debug,warn"
     ports:
       - 8078:8078/tcp
     entrypoint:
