@@ -34,7 +34,6 @@ services:
 
   engine:
     restart: "unless-stopped"
-    stop_grace_period: 3m
     build:
       context: ./chainflip
       dockerfile: Dockerfile.engine
@@ -63,8 +62,8 @@ services:
       - /etc/localtime:/etc/localtime:ro
     entrypoint:
       - /usr/local/bin/chainflip-cli
-      - --config-path
-      - /etc/chainflip/config/Settings.toml
+      - --config-root
+      - /etc/chainflip
 
 volumes:
   node-data:
