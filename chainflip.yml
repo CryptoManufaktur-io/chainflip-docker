@@ -3,7 +3,12 @@ services:
   node:
     restart: "unless-stopped"
     stop_grace_period: 3m
-    image: chainfliplabs/chainflip-node:${NODE_TAG}
+    build:
+      context: ./chainflip
+      dockerfile: Dockerfile.node
+      args:
+        - DOCKER_TAG=${NODE_TAG}
+    image: cf-node:local
     volumes:
       - node-data:/etc/chainflip/chaindata
       - ./keys:/etc/chainflip/keys
@@ -18,14 +23,17 @@ services:
       - --node-key-file
       - /etc/chainflip/keys/node_key_file
       - --validator
-      - --state-cache-size
-      - "0"
       - --prometheus-external
 
   engine:
     restart: "unless-stopped"
     stop_grace_period: 3m
-    image: chainfliplabs/chainflip-engine:${ENGINE_TAG}
+    build:
+      context: ./chainflip
+      dockerfile: Dockerfile.engine
+      args:
+        - DOCKER_TAG=${NODE_TAG}
+    image: cf-engine:local
     volumes:
       - engine-data:/etc/chainflip/data.db
       - ./keys:/etc/chainflip/keys

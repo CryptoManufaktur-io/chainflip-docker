@@ -1,0 +1,5 @@
+ARG DOCKER_TAG
+
+FROM chainfliplabs/chainflip-node:${DOCKER_TAG}
+
+RUN mkdir -p /etc/chainflip/chaindata && chown -R flip:flip /etc/chainflip
