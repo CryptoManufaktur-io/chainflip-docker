@@ -26,3 +26,7 @@ Set permissions and ownership and clean up after yourself:
 - `sudo chown 1000:1000 ./keys/*key*`
 - `sudo chmod 600 ./keys/*key*`
 - `history -c`
+
+## Sync node
+
+`./flipd up` or `docker compose up -d`. Check logs of the node with `./flipd logs -f node`. The `engine` service will fail until `node` is synced.
