@@ -31,8 +31,6 @@ services:
       - --unsafe-ws-external
       - --unsafe-rpc-external
       - --rpc-cors=*
-      - --sync
-      - fast
 
   engine:
     restart: "unless-stopped"
