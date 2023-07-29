@@ -17,7 +17,7 @@ http_node_endpoint = "https://goerli.example.com"
 private_key_file = "/etc/chainflip/keys/ethereum_key_file"
 
 [health_check]
-hostname = "127.0.0.1"
+hostname = "engine"
 port = 5555
 
 [signing]
