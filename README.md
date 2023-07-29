@@ -16,9 +16,9 @@ Read this alongside the official [Chainflip docs](https://docs.chainflip.io/pers
 
 Generate the Ethereum key exactly as described in the official docs and store it in `keys/ethereum_key_file`
  
-To generate the signing key, use `docker run --rm chainfliplabs/chainflip-node:0.8.7 key generate`, adjusting the version tag as desired. Set `SECRET_SEED` as described in the official docs, then store it in `keys/signing_key_file` like so: `echo -n "${SECRET_SEED:2}" | tee ./keys/signing_key_file`
+To generate the signing key, use `docker run --rm chainfliplabs/chainflip-node:0.8.7 chainflip-node key generate`, adjusting the version tag as desired. Set `SECRET_SEED` as described in the official docs, then store it in `keys/signing_key_file` like so: `echo -n "${SECRET_SEED:2}" | tee ./keys/signing_key_file`
 
-Finally to generate the node key, use `docker run --rm -v "$(pwd)"/keys:/etc/chainflip/keys chainfliplabs/chainflip-node:0.8.7 key generate-node-key --file /etc/chainflip/keys/node_key_file`, adjusting the version tag as desired.
+Finally to generate the node key, use `docker run --rm -v "$(pwd)"/keys:/etc/chainflip/keys chainfliplabs/chainflip-node:0.8.7 chainflip-node key generate-node-key --file /etc/chainflip/keys/node_key_file`, adjusting the version tag as desired.
 
 Back up the contents of these files, as they cannot be recovered if they are lost.
 
