@@ -1,0 +1,58 @@
+version: "3.9"
+services:
+  node:
+    restart: "unless-stopped"
+    stop_grace_period: 3m
+    image: chainfliplabs/chainflip-node:${NODE_TAG}
+    volumes:
+      - node-data:/etc/chainflip/chaindata
+      - ./keys:/etc/chainflip/keys
+      - ./config:/etc/chainflip/config
+      - /etc/localtime:/etc/localtime:ro
+    entrypoint:
+      - /usr/local/bin/chainflip-node
+      - --chain
+      - /etc/chainflip/perseverance.chainspec.json
+      - --base-path
+      - /etc/chainflip/chaindata
+      - --node-key-file
+      - /etc/chainflip/keys/node_key_file
+      - --validator
+      - --state-cache-size
+      - "0"
+      - --prometheus-external
+
+  engine:
+    restart: "unless-stopped"
+    stop_grace_period: 3m
+    image: chainfliplabs/chainflip-engine:${ENGINE_TAG}
+    volumes:
+      - engine-data:/etc/chainflip/data.db
+      - ./keys:/etc/chainflip/keys
+      - ./config:/etc/chainflip/config
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - RUST_LOG="chainflip_engine=debug,multisig=debug,warn,chainflip_engine::p2p=error"
+    ports:
+      - 8078:8078/tcp
+    entrypoint:
+      - /usr/local/bin/chainflip-engine
+      - --config-root
+      - /etc/chainflip
+
+  cli:
+    restart: "no"
+    profiles: ["tools"]
+    image: chainfliplabs/chainflip-cli:${CLI_TAG}
+    volumes:
+      - ./keys:/etc/chainflip/keys
+      - ./config:/etc/chainflip/config
+      - /etc/localtime:/etc/localtime:ro
+    entrypoint:
+      - /usr/local/bin/chainflip-cli
+      - --config-path
+      - /etc/chainflip/config/Settings.toml
+
+volumes:
+  node-data:
+  engine-data:

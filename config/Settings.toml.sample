@@ -1,0 +1,32 @@
+# Default configurations for the CFE
+[node_p2p]
+node_key_file = "/etc/chainflip/keys/node_key_file"
+ip_address="1.2.3.4"
+port = "8078"
+
+[state_chain]
+ws_endpoint = "ws://node:9944"
+signing_key_file = "/etc/chainflip/keys/signing_key_file"
+
+[eth]
+# Ethereum RPC endpoints (websocket and http for redundancy).
+ws_node_endpoint = "wss://goerliws.example.com"
+http_node_endpoint = "https://goerli.example.com"
+
+# Ethereum private key file path. This file should contain a hex-encoded private key.
+private_key_file = "/etc/chainflip/keys/ethereum_key_file"
+
+[health_check]
+hostname = "engine"
+port = 5555
+
+[signing]
+db_file = "/etc/chainflip/data.db"
+
+[dot]
+ws_node_endpoint = "wss://rpc-pdot.chainflip.xyz:443"
+
+[btc]
+http_node_endpoint = "http://a108a82b574a640359e360cf66afd45d-424380952.eu-central-1.elb.amazonaws.com"
+rpc_user = "flip"
+rpc_password = "flip"
