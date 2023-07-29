@@ -48,3 +48,12 @@ As long as you saw a successful tx, next rotate: `docker compose run --rm cli ro
 Check logs of node and engine, make sure you're synced and everything is working well, check status is green in the web app, then start bidding: `docker compose run --rm cli start-bidding`
 
 Optionally, set a vanity name: `docker compose run --rm cli vanity-name <my-discord-username>`
+
+## Updating chainflip
+
+If you are using a specific version tag, instead of latest, `nano .env` and set the desired new version tag.
+
+`./flipd update` to pull the new version.
+
+`./flipd up` to start using it
+
