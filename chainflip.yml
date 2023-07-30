@@ -46,6 +46,8 @@ services:
       args:
         - DOCKER_TAG=${ENGINE_TAG}
     image: cf-engine:local
+    environment:
+      - RUST_LOG=${LOG_LEVEL}
     volumes:
       - engine-data:/etc/chainflip/data.db
       - ./keys:/etc/chainflip/keys
