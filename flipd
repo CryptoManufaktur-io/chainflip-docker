@@ -477,9 +477,9 @@ version() {
     # Client versions
     case "${value}" in
         *chainflip.yml* )
-            docompose exec node chainflip-node version
+            docompose exec node chainflip-node --version
             echo
-            docompose exec engine chainflip-engine version
+            docompose exec engine chainflip-engine --version
             echo
             ;;&
         *grafana-cloud.yml* )
