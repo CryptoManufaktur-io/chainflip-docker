@@ -35,6 +35,8 @@ services:
       - "0"
       - --log
       - ${LOG_LEVEL}
+      - --sync
+      - ${SYNC_MODE}
 
   engine:
     restart: "unless-stopped"
