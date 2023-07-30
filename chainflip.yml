@@ -46,6 +46,10 @@ services:
       args:
         - DOCKER_TAG=${ENGINE_TAG}
     image: cf-engine:local
+    ulimits:
+      nofile:
+        soft: 16000
+        hard: 16000
     environment:
       - RUST_LOG=${LOG_LEVEL}
     volumes:
