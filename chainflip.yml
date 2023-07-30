@@ -44,7 +44,7 @@ services:
       context: ./chainflip
       dockerfile: Dockerfile.engine
       args:
-        - DOCKER_TAG=${NODE_TAG}
+        - DOCKER_TAG=${ENGINE_TAG}
     image: cf-engine:local
     volumes:
       - engine-data:/etc/chainflip/data.db
