@@ -31,6 +31,8 @@ services:
       - --unsafe-ws-external
       - --unsafe-rpc-external
       - --rpc-cors=*
+      - --rpc-methods
+      - unsafe
       - --log
       - ${LOG_LEVEL}
       - --sync
