@@ -478,7 +478,6 @@ version() {
     case "${value}" in
         *chainflip.yml* )
             docompose exec node chainflip-node --version
-            echo
             docompose exec engine chainflip-engine --version
             echo
             ;;&

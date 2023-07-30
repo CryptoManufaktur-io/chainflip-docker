@@ -57,3 +57,4 @@ If you are using a specific version tag, instead of latest, `nano .env` and set 
 
 `./flipd up` to start using it
 
+This is chainflip-docker v1.0
