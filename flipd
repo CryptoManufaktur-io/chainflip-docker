@@ -311,7 +311,7 @@ update() {
 
     if [ -z "${ETHDSECUNDO-}" ]; then
         # Do not track changes to ext-network.yml
-        ${__as_owner} git update-index --assume-unchanged ext-network.yml
+       # ${__as_owner} git update-index --assume-unchanged ext-network.yml
         ${__as_owner} git config pull.rebase false
         ${__as_owner} git pull
         # BASH_SOURCE so newer code gets to do the update. Use an ENV var
@@ -375,7 +375,7 @@ envmigrate() {
         return
     fi
 
-    ALL_VARS=( COMPOSE_FILE NODE_TAG ENGINE_TAG CLI_TAG LOGS_LABEL NODE_EXPORTER_IGNORE_MOUNT_REGEX NODE_P2P_PORT ENGINE_P2P_PORT )
+    ALL_VARS=( COMPOSE_FILE NODE_TAG ENGINE_TAG CLI_TAG LOGS_LABEL NODE_EXPORTER_IGNORE_MOUNT_REGEX NODE_P2P_PORT ENGINE_P2P_PORT LOG_LEVEL )
     OLD_VARS=( )
     NEW_VARS=( )
 

@@ -31,6 +31,10 @@ services:
       - --unsafe-ws-external
       - --unsafe-rpc-external
       - --rpc-cors=*
+      - --trie-cache-size
+      - "0"
+      - --log
+      - ${LOG_LEVEL}
 
   engine:
     restart: "unless-stopped"
