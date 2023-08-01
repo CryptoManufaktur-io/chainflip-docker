@@ -35,6 +35,8 @@ services:
       - unsafe
       - --log
       - ${LOG_LEVEL}
+      - --database
+      - paritydb
       - --sync
       - ${SYNC_MODE}
 
