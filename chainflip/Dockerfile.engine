@@ -1,5 +1,0 @@
-ARG DOCKER_TAG
-
-FROM chainfliplabs/chainflip-engine:${DOCKER_TAG}
-
-RUN mkdir -p /etc/chainflip/data.db && chown -R flip:flip /etc/chainflip

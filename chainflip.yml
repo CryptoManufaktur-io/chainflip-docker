@@ -3,14 +3,9 @@ services:
   node:
     restart: "unless-stopped"
     stop_grace_period: 3m
-    build:
-      context: ./chainflip
-      dockerfile: Dockerfile.node
-      args:
-        - DOCKER_TAG=${NODE_TAG}
-    image: cf-node:local
+    image: chainfliplabs/chainflip-node:${NODE_TAG}
     volumes:
-      - node-data:/etc/chainflip/chaindata
+      - node-data:/etc/chainflip
       - ./keys:/etc/chainflip/keys
       - ./config:/etc/chainflip/config
       - /etc/localtime:/etc/localtime:ro
@@ -42,12 +37,7 @@ services:
 
   engine:
     restart: "unless-stopped"
-    build:
-      context: ./chainflip
-      dockerfile: Dockerfile.engine
-      args:
-        - DOCKER_TAG=${ENGINE_TAG}
-    image: cf-engine:local
+    image: chainfliplabs/chainflip-engine:${ENGINE_TAG}
     ulimits:
       nofile:
         soft: 16000
@@ -55,7 +45,7 @@ services:
     environment:
       - RUST_LOG=${LOG_LEVEL}
     volumes:
-      - engine-data:/etc/chainflip/data.db
+      - engine-data:/etc/chainflip
       - ./keys:/etc/chainflip/keys
       - ./config:/etc/chainflip/config
       - /etc/localtime:/etc/localtime:ro
