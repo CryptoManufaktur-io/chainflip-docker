@@ -169,7 +169,7 @@ check_for_snap() {
         echo
         echo "The exact steps depend a little on whether there already is"
         echo "an apt version of docker installed as well, but in a nutshell"
-        echo '"./ethd stop" followed by "sudo snap remove --purge docker"'
+        echo '"./${me} stop" followed by "sudo snap remove --purge docker"'
         echo "and then a reboot, and as needed install docker.io or docker-ce with apt."
         echo
         echo "Do join us on EthStaker Discord to work through this issue."
@@ -344,7 +344,7 @@ find the original contents in ${ENV_FILE}.bak."
         rm "${ENV_FILE}".source
     fi
     echo
-    echo "An ./ethd up command will start using the new images and configuration."
+    echo "A ./${me} up command will start using the new images and configuration."
     if [[ "$__distro" = "ubuntu" ]]; then
       __major_version=$(lsb_release -r | cut -d: -f2 | sed s/'^\t'// | cut -d. -f1)
       if [ "${__major_version}" -lt 20 ]; then
@@ -490,7 +490,6 @@ version() {
 }
 
 printhelp() {
-    me=$(basename "${BASH_SOURCE[0]}")
     echo "usage: ${me} [help|-h|--help] <subcommand>"
     echo ""
     echo "optional arguments:"
@@ -528,6 +527,8 @@ printhelp() {
     echo "$me will attempt to use sudo as needed for docker commands"
     echo ""
 }
+
+me=$(basename "${BASH_SOURCE[0]}")
 
 if [[ "$#" -eq 0 || "$1" == "help" || "$1" == "-h" || "$1" == "--help" ]]; then
     printhelp
