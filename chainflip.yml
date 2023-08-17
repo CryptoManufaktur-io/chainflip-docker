@@ -34,6 +34,8 @@ services:
       - paritydb
       - --sync
       - ${SYNC_MODE}
+      - --execution
+      - native
 
   engine:
     restart: "unless-stopped"
