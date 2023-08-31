@@ -23,7 +23,6 @@ services:
       - --prometheus-external
       - --port
       - ${NODE_P2P_PORT:-30333}
-      - --unsafe-ws-external
       - --unsafe-rpc-external
       - --rpc-cors=*
       - --rpc-methods
