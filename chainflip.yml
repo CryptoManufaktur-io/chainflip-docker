@@ -87,7 +87,7 @@ services:
       - --prometheus.hostname
       - 0.0.0.0
       - --prometheus.port
-      - "6060"
+      - "5566"
 
   cli:
     restart: "no"

@@ -9,4 +9,4 @@
     scheme: http
     static_configs:
     - targets:
-      - engine:6060
+      - engine:5566
