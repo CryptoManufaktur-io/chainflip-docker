@@ -4,3 +4,9 @@
     static_configs:
     - targets:
       - node:9615
+  - job_name: chainflip-engine
+    metrics_path: /metrics
+    scheme: http
+    static_configs:
+    - targets:
+      - engine:6060

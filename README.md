@@ -6,9 +6,7 @@ Chainflip node in docker compose
 
 `./flipd install` can be used to install docker-ce and docker compose, if they aren't already installed
 
-`cp default.env .env` and adjust variables such as the version tags
-
-`cp config/Settings.toml.sample config/Settings.toml` and then `nano config/Settings.toml`. Adjust the `ip_address`, setting it to the public address of the host, and the `ws_node_endpoint` and `http_node_endpoint` URLs for your Ethereum node
+`cp default.env .env` and adjust variables such as the version tags, `HOST_IP` and `ETH_RPC` as well as `ETH_WS` URLs.
 
 ## Generate keys
 
@@ -57,4 +55,4 @@ If you are using a specific version tag, instead of latest, `nano .env` and set 
 
 `./flipd up` to start using it
 
-This is chainflip-docker v1.0
+This is chainflip-docker v1.1
