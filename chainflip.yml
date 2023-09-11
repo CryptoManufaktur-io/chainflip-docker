@@ -69,7 +69,7 @@ services:
       - --eth.private_key_file
       - /etc/chainflip/keys/ethereum_key_file
       - --health_check.hostname
-      - 127.0.0.1
+      - 0.0.0.0
       - --health_check.port
       - "5555"
       - --p2p.ip_address
