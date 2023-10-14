@@ -1,4 +1,5 @@
 .env*
+ext-network.yml
 config/Settings.toml
 keys/*key*
 prometheus/custom-prom.yml
