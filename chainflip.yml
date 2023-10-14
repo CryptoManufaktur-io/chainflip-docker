@@ -34,6 +34,10 @@ services:
       - ${SYNC_MODE}
       - --execution
       - native
+    labels:
+      - metrics.scrape=true
+      - metrics.path=/metrics
+      - metrics.port=9615
 
   engine:
     restart: "unless-stopped"
@@ -88,6 +92,10 @@ services:
       - 0.0.0.0
       - --prometheus.port
       - "5566"
+    labels:
+      - metrics.scrape=true
+      - metrics.path=/metrics
+      - metrics.port=5566
 
   cli:
     restart: "no"
