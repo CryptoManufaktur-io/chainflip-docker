@@ -49,7 +49,7 @@ services:
     environment:
       - RUST_LOG=${LOG_LEVEL}
     volumes:
-      - ./Settings.toml /etc/chainflip/config/Settings.toml
+      - ./Settings.toml:/etc/chainflip/config/Settings.toml
       - engine-data:/etc/chainflip
       - ./keys:/etc/chainflip/keys
       - /etc/localtime:/etc/localtime:ro
