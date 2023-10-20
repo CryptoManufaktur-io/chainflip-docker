@@ -44,7 +44,7 @@ determine_sudo() {
         systemctl status docker >/dev/null
         result=$?
         if [ ! "${result}" -eq 0 ]; then
-            echo "The docker daemon is not running. Please check docker installation."
+            echo "The Docker daemon is not running. Please check Docker installation."
             echo "\"sudo systemctl status docker\" and \"sudo journalctl -fu docker\" will be helpful."
             echo "Aborting."
             exit 1
@@ -53,7 +53,7 @@ determine_sudo() {
 
     __maybe_sudo=""
     if ! docker images >/dev/null 2>&1; then
-        echo "Will use sudo to access docker"
+        echo "Will use sudo to access Docker"
         __maybe_sudo="sudo"
     fi
 }
@@ -165,13 +165,13 @@ handle_root() {
 check_for_snap() {
     if [[ "$__distro" = "ubuntu" && -n "$(which snap)" ]] && snap list 2>/dev/null | grep -qw 'docker'; then
         echo
-        echo "WARNING! Snap docker package detected. This WILL result in issues."
+        echo "WARNING! Snap Docker package detected. This WILL result in issues."
         echo "Removing the package will delete volumes and require a resync."
         echo
         echo "Doing so is still highly recommended however."
         echo
         echo "The exact steps depend a little on whether there already is"
-        echo "an apt version of docker installed as well, but in a nutshell"
+        echo "an apt version of Docker installed as well, but in a nutshell"
         echo '"./${me} stop" followed by "sudo snap remove --purge docker"'
         echo "and then a reboot, and as needed install docker.io or docker-ce with apt."
         echo
@@ -186,7 +186,7 @@ install() {
     check_for_snap
     set -e
     while true; do
-        read -rp "This will attempt to install docker and make your user part of the docker group. Do you wish to continue? (no/yes) " yn
+        read -rp "This will attempt to install Docker and make your user part of the docker group. Do you wish to continue? (no/yes) " yn
         case $yn in
             [Yy]* ) break;;
             * ) echo "Aborting, no changes made"; exit 0;;
@@ -195,10 +195,11 @@ install() {
     if [[ "$__distro" = "ubuntu" ]]; then
         __major_version=$(lsb_release -r | cut -d: -f2 | sed s/'^\t'// | cut -d. -f1)
         if [ "${__major_version}" -lt 20 ]; then
-            echo "This script cannot install docker on Ubuntu ${__major_version}. Consider upgrading to 22.04 or 20.04"
+            echo "This script cannot install Docker on Ubuntu ${__major_version}. Consider upgrading to 22.04 or 20.04"
         fi
         if [ -z "$(which docker)" ]; then
-            ${__auto_sudo} apt-get update && ${__auto_sudo} apt-get install -y ca-certificates curl gnupg lsb-release whiptail bc chrony
+            ${__auto_sudo} apt-get update && ${__auto_sudo} apt-get install -y ca-certificates curl gnupg lsb-release \
+               chrony pkg-config
             ${__auto_sudo} mkdir -p /etc/apt/keyrings
             ${__auto_sudo} curl -fsSL https://download.docker.com/linux/ubuntu/gpg | ${__auto_sudo} gpg --dearmor -o /etc/apt/keyrings/docker.gpg
             ${__auto_sudo} echo \
@@ -221,7 +222,7 @@ install() {
     elif [[ "$__distro" =~ "debian" ]]; then
         if [ -z "$(which docker)" ]; then
             ${__auto_sudo} apt-get update
-            ${__auto_sudo} apt-get -y install ca-certificates curl gnupg lsb-release whiptail bc chrony
+            ${__auto_sudo} apt-get -y install ca-certificates curl gnupg lsb-release chrony pkg-config
             __major_version=$(lsb_release -r | cut -f2)
             if [ "${__major_version}" -lt 10 ]; then
                 echo "This script cannot install docker on Debian ${__major_version}. Consider upgrading to 11 or 12."
@@ -594,7 +595,7 @@ check_disk_space
 
 if [ "${__compose_upgraded}" -eq 1 ]; then
   echo
-  echo "You updated compose to V2."
+  echo "You updated Docker Compose to V2."
   echo "The \"docker-compose\" command is gone and replaced with \"docker compose\"."
   echo "You can create yourself an alias for \"docker-compose\"."
   echo
