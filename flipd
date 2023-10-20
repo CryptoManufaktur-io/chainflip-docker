@@ -575,8 +575,8 @@ command="$1"
 shift
 
 determine_distro
-determine_sudo
 handle_root
+prep_prometheus
 
 # Don't check for docker before it's installed
 if [ "$command" = "install" ]; then
@@ -584,9 +584,9 @@ if [ "$command" = "install" ]; then
     exit "$?"
 fi
 
+determine_sudo
 determine_docker
 determine_compose
-prep_prometheus
 
 if ! dodocker images >/dev/null 2>&1; then
     echo "Please ensure you can call $__docker_exe before running this script."
