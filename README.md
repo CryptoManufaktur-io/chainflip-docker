@@ -77,4 +77,4 @@ If you are using a specific version tag, instead of latest, `nano .env` and set 
 After the runtime upgrade, `nano .env` again and remove `:old-engine.yml` from `COMPOSE_FILE`, then `./flipd up` to
 stop running the old engine.
 
-This is chainflip-docker v1.2.0
+This is chainflip-docker v1.2.1
