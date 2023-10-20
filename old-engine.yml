@@ -1,0 +1,62 @@
+version: "3.9"
+services:
+  old-engine:
+    restart: "unless-stopped"
+    image: chainfliplabs/chainflip-engine:${OLD_ENGINE_TAG}
+    ulimits:
+      nofile:
+        soft: 16000
+        hard: 16000
+    environment:
+      - RUST_LOG=${LOG_LEVEL}
+    volumes:
+      - engine-data:/etc/chainflip
+      - ./keys:/etc/chainflip/keys
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - ${OLD_ENGINE_P2P_PORT:-8079}:${OLD_ENGINE_P2P_PORT:-8079}/tcp
+    entrypoint:
+      - /usr/local/bin/chainflip-engine
+      - --btc.http_node_endpoint
+      - http://a108a82b574a640359e360cf66afd45d-424380952.eu-central-1.elb.amazonaws.com
+      - --btc.rpc_user
+      - flip
+      - --btc.rpc_password
+      - flip
+      - --dot.http_node_endpoint
+      - https://rpc-pdot.chainflip.io:443
+      - --dot.ws_node_endpoint
+      - wss://rpc-pdot.chainflip.xyz:443
+      - --eth.http_node_endpoint
+      - ${ETH_RPC}
+      - --eth.ws_node_endpoint
+      - ${ETH_WS}
+      - --eth.private_key_file
+      - /etc/chainflip/keys/ethereum_key_file
+      - --health_check.hostname
+      - 0.0.0.0
+      - --health_check.port
+      - "5555"
+      - --p2p.ip_address
+      - ${HOST_IP}
+      - --p2p.port
+      - ${OLD_ENGINE_P2P_PORT:-8079}
+      - --p2p.node_key_file
+      - /etc/chainflip/keys/node_key_file
+      - --signing.db_file
+      - /etc/chainflip/data.db
+      - --state_chain.signing_key_file
+      - /etc/chainflip/keys/signing_key_file
+      - --state_chain.ws_endpoint
+      - ws://node:9944
+      - --prometheus.hostname
+      - 0.0.0.0
+      - --prometheus.port
+      - "5566"
+    labels:
+      - metrics.scrape=true
+      - metrics.path=/metrics
+      - metrics.port=5566
+
+volumes:
+  engine-data:

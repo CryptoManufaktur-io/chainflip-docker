@@ -65,10 +65,16 @@ central traefik/prometheus/promtail stack.
 
 ## Updating chainflip
 
+If there is a runtime upgrade, `nano .env` and add `:old-engine.yml` to `COMPOSE_FILE`. Also adjust the
+`OLD_ENGINE_TAG`.
+
 If you are using a specific version tag, instead of latest, `nano .env` and set the desired new version tag.
 
 `./flipd update` to pull the new version.
 
 `./flipd up` to start using it
 
-This is chainflip-docker v1.1.1
+After the runtime upgrade, `nano .env` again and remove `:old-engine.yml` from `COMPOSE_FILE`, then `./flipd up` to
+stop running the old engine.
+
+This is chainflip-docker v1.2.0
