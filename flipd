@@ -104,8 +104,13 @@ upgrade_compose() {
     ${__auto_sudo} apt-get update && ${__auto_sudo} apt-get install -y ca-certificates curl gnupg lsb-release
     __major_version=$(lsb_release -r | cut -d: -f2 | sed s/'^\t'// | cut -d. -f1)
     if [ "${__major_version}" -lt 20 ]; then
-      echo "This script cannot update compose on Ubuntu ${__major_version}. Consider upgrading to 22.04 or 20.04"
+      echo "This script cannot update Docker Compose on Ubuntu ${__major_version}. Consider upgrading to 22.04 or 20.04"
       exit 0
+    fi
+    if dpkg-query -W -f='${Status}' docker.io 2>/dev/null | grep -q "ok installed"; then
+        ${__auto_sudo} apt-mark manual docker.io
+    elif dpkg-query -W -f='${Status}' docker-ce 2>/dev/null | grep -q "ok installed"; then
+        ${__auto_sudo} apt-mark manual docker-ce
     fi
     ${__auto_sudo} apt-get remove -y docker-compose
     echo "Removed docker-compose"
@@ -115,7 +120,7 @@ upgrade_compose() {
         "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
         $(lsb_release -cs) stable" | ${__auto_sudo} tee /etc/apt/sources.list.d/docker.list > /dev/null
     ${__auto_sudo} apt-get update
-    ${__auto_sudo} apt-get install -y docker-compose-plugin
+    ${__auto_sudo} apt-get install -y docker-compose-plugin docker-buildx-plugin
     echo "Installed docker-compose-plugin"
     __old_compose=0
     __compose_exe="docker compose"
@@ -124,8 +129,13 @@ upgrade_compose() {
     ${__auto_sudo} apt-get update && ${__auto_sudo} apt-get -y install ca-certificates curl gnupg lsb-release
     __major_version=$(lsb_release -r | cut -f2)
     if [ "${__major_version}" -lt 10 ]; then
-        echo "This script cannot update compose on Debian ${__major_version}. Consider upgrading to 11 or 12."
+        echo "This script cannot update Docker Compose on Debian ${__major_version}. Consider upgrading to 11 or 12."
         exit 0
+    fi
+    if dpkg-query -W -f='${Status}' docker.io 2>/dev/null | grep -q "ok installed"; then
+        ${__auto_sudo} apt-mark manual docker.io
+    elif dpkg-query -W -f='${Status}' docker-ce 2>/dev/null | grep -q "ok installed"; then
+        ${__auto_sudo} apt-mark manual docker-ce
     fi
     ${__auto_sudo} apt-get remove -y docker-compose
     echo "Removed docker-compose"
@@ -135,13 +145,13 @@ upgrade_compose() {
         "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
         $(lsb_release -cs) stable" | ${__auto_sudo} tee /etc/apt/sources.list.d/docker.list > /dev/null
     ${__auto_sudo} apt-get update
-    ${__auto_sudo} apt-get install -y docker-compose-plugin
+    ${__auto_sudo} apt-get install -y docker-compose-plugin docker-buildx-plugin
     echo "Installed docker-compose-plugin"
     __old_compose=0
     __compose_exe="docker compose"
     __compose_upgraded=1
   else
-    echo "This script does not know how to update compose on $__distro"
+    echo "This script does not know how to update Docker Compose on $__distro"
   fi
 }
 
@@ -206,7 +216,8 @@ install() {
                 "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
                 $(lsb_release -cs) stable" | ${__auto_sudo} tee /etc/apt/sources.list.d/docker.list > /dev/null
             ${__auto_sudo} apt-get update
-            ${__auto_sudo} apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+            ${__auto_sudo} apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin \
+                docker-buildx-plugin
             echo "Installed docker-ce and docker-compose-plugin"
         else
             echo "Docker is already installed"
@@ -234,7 +245,8 @@ install() {
                 "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
                 $(lsb_release -cs) stable" | ${__auto_sudo} tee /etc/apt/sources.list.d/docker.list > /dev/null
             ${__auto_sudo} apt-get update
-            ${__auto_sudo} apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+            ${__auto_sudo} apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin \
+                docker-buildx-plugin
             echo "Installed docker-ce and docker-compose-plugin"
         else
             echo "Docker is already installed"
@@ -248,7 +260,7 @@ install() {
             echo "Your user is already part of the docker group"
         fi
     else
-        echo "This script does not know how to install docker on $__distro"
+        echo "This script does not know how to install Docker on $__distro"
     fi
     set +e
     return 0
@@ -504,7 +516,7 @@ printhelp() {
     echo ""
     echo "subcommands:"
     echo "  install"
-    echo "     attempts to install docker and docker compose for you"
+    echo "     attempts to install Docker and Docker Compose for you"
     echo "  update"
     echo "     updates all client versions and ${__project_name} itself"
     echo "  up (or start)"
@@ -519,7 +531,7 @@ printhelp() {
     echo "  logs"
     echo "     shows logs"
     echo "  cmd <command>"
-    echo "     executes an arbitrary docker compose command. Use \"cmd help\" to list them"
+    echo "     executes an arbitrary Docker Compose command. Use \"cmd help\" to list them"
     echo "  terminate"
     echo "     stops the ${__app_name} and destroys all data stores"
     echo ""
@@ -530,7 +542,7 @@ printhelp() {
     echo "    shows logs only for ${__sample_service} service"
     echo ""
     echo ""
-    echo "$me will attempt to use sudo as needed for docker commands"
+    echo "$me will attempt to use sudo as needed for Docker commands"
     echo ""
 }
 
