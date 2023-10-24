@@ -49,7 +49,6 @@ services:
     environment:
       - RUST_LOG=${LOG_LEVEL}
     volumes:
-      - ./Settings.toml:/etc/chainflip/config/Settings.toml
       - engine-data:/etc/chainflip
       - ./keys:/etc/chainflip/keys
       - /etc/localtime:/etc/localtime:ro
@@ -59,9 +58,9 @@ services:
       - /usr/local/bin/chainflip-engine
       - --btc.rpc.http_endpoint
       - ${BTC_RPC}
-      - --btc.basic_auth_user
+      - --btc.rpc.basic_auth_user
       - ${BTC_USER}
-      - --btc.basic_auth_password
+      - --btc.rpc.basic_auth_password
       - ${BTC_PASSWORD}
       - --btc.backup_rpc.http_endpoint
       - ${BTC_BACKUP_RPC}
