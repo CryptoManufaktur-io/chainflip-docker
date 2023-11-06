@@ -44,14 +44,14 @@ Stake tFLIP to the node exactly as described in the official docs.
 
 Restart the engine: `./flipd restart engine`
 
-Register your account for the validator role: `docker compose run --rm cli register-account-role Validator`
+Register your account for the validator role: `./flipd cmd run --rm cli register-account-role Validator`
 
-As long as you saw a successful tx, next rotate: `docker compose run --rm cli rotate`
+As long as you saw a successful tx, next rotate: `./flipd cmd run --rm cli rotate`
 
 Check logs of node and engine, make sure you're synced and everything is working well, check status is green in the web
-app, then start bidding: `docker compose run --rm cli start-bidding`
+app, then start bidding: `./flipd cmd run --rm cli start-bidding`
 
-Optionally, set a vanity name: `docker compose run --rm cli vanity-name <my-discord-username>`
+Optionally, set a vanity name: `./flipd cmd run --rm cli vanity-name <my-discord-username>`
 
 ## Get metrics
 
@@ -77,4 +77,9 @@ If you are using a specific version tag, instead of latest, `nano .env` and set 
 After the runtime upgrade, `nano .env` again and remove `:old-engine.yml` from `COMPOSE_FILE`, then `./flipd up` to
 stop running the old engine.
 
-This is chainflip-docker v1.2.1
+## Restoring from backup
+
+After you restore the `keys` directory from backup and sync the node and engine again, run
+`./flipd cmd run --rm cli rotate`. This is necessary after restore.
+
+This is chainflip-docker v1.2.2
