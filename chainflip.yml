@@ -118,7 +118,6 @@ services:
     image: chainfliplabs/chainflip-cli:${CLI_TAG}
     volumes:
       - ./keys:/etc/chainflip/keys
-      - ./config:/etc/chainflip/config
       - /etc/localtime:/etc/localtime:ro
     entrypoint:
       - /usr/local/bin/chainflip-cli
