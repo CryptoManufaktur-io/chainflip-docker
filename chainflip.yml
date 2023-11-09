@@ -9,6 +9,11 @@ services:
       - /etc/localtime:/etc/localtime:ro
     ports:
       - ${NODE_P2P_PORT:-30333}:${NODE_P2P_PORT:-30333}/tcp
+    healthcheck:
+      test: ["CMD-SHELL", "true"] # I don't have curl so just wait 30s
+      start_period: 30s
+      interval: 10s
+      timeout: 5s
     entrypoint:
       - /usr/local/bin/chainflip-node
       - --chain
@@ -53,6 +58,9 @@ services:
       - /etc/localtime:/etc/localtime:ro
     ports:
       - ${ENGINE_P2P_PORT:-8078}:${ENGINE_P2P_PORT:-8078}/tcp
+    depends_on:
+      node:
+        condition: service_healthy
     entrypoint:
       - /usr/local/bin/chainflip-engine
       - --btc.rpc.http_endpoint
