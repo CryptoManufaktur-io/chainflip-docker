@@ -14,13 +14,16 @@ services:
       - /etc/localtime:/etc/localtime:ro
     ports:
       - ${OLD_ENGINE_P2P_PORT:-8079}:${OLD_ENGINE_P2P_PORT:-8079}/tcp
+    depends_on:
+      node:
+        condition: service_healthy
     entrypoint:
       - /usr/local/bin/chainflip-engine
       - --btc.rpc.http_endpoint
       - ${BTC_RPC}
-      - --btc.basic_auth_user
+      - --btc.rpc.basic_auth_user
       - ${BTC_USER}
-      - --btc.basic_auth_password
+      - --btc.rpc.basic_auth_password
       - ${BTC_PASSWORD}
       - --btc.backup_rpc.http_endpoint
       - ${BTC_BACKUP_RPC}
