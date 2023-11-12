@@ -18,11 +18,6 @@ Generate the keys with `./flipd cmd run --rm cli generate-keys --path /etc/chain
 
 Back up the `./keys` directory, as another failsafe alongside the mnemonic.
 
-Set permissions and ownership and clean up after yourself:
-- `sudo chown 1000:1000 ./keys/*key*`
-- `sudo chmod 600 ./keys/*key*`
-- `history -c`
-
 Take special note of the Validator Account ID beginning with cF. This is the ID that you will need to add funds and track your node.
 
 > NEVER REVEAL YOUR PRIVATE KEYS TO ANYONE.
