@@ -10,24 +10,22 @@ Chainflip node in docker compose
 
 ## Generate keys
 
-Read this alongside the official [Chainflip docs](https://docs.chainflip.io/perseverance-validator-documentation/validator-setup/keys)
+Read this alongside the official [Chainflip docs](https://docs.chainflip.io/perseverance/validator-setup/keys)
 
-Generate the Ethereum key exactly as described in the official docs and store it in `keys/ethereum_key_file`
- 
-To generate the signing key, use `docker run --rm chainfliplabs/chainflip-node:latest chainflip-node key generate`,
-adjusting the version tag as desired. Set `SECRET_SEED` as described in the official docs, then store it in
-`keys/signing_key_file` like so: `echo -n "${SECRET_SEED:2}" | tee ./keys/signing_key_file`
+Generate the keys with `./flipd cmd run --rm cli generate-keys --path /etc/chainflip/keys`.
 
-Finally to generate the node key, use `docker run --rm -v "$(pwd)"/keys:/etc/chainflip/keys
-chainfliplabs/chainflip-node:latest chainflip-node key generate-node-key --file /etc/chainflip/keys/node_key_file`,
-adjusting the version tag as desired.
+**Make sure to back up your Seed Phrase and make a note of the public keys and account ID. You will need the Seed Phrase if you ever need to restore your node or recover your funds if you lose access to the node. DO NOT LOSE THIS.**
 
-Back up the contents of these files, as they cannot be recovered if they are lost.
+Back up the `./keys` directory, as another failsafe alongside the mnemonic.
 
 Set permissions and ownership and clean up after yourself:
 - `sudo chown 1000:1000 ./keys/*key*`
 - `sudo chmod 600 ./keys/*key*`
 - `history -c`
+
+Take special note of the Validator Account ID beginning with cF. This is the ID that you will need to add funds and track your node.
+
+> NEVER REVEAL YOUR PRIVATE KEYS TO ANYONE.
 
 ## Sync node
 
@@ -36,7 +34,7 @@ print "wait" messages until `node` is synced.
 
 ## Funding and bidding
 
-Read this alongside the official [Chainflip docs](https://docs.chainflip.io/perseverance-validator-documentation/funding/funding)
+Read this alongside the official [Chainflip docs](https://docs.chainflip.io/perseverance/funding/funding-and-bidding).
 
 Make sure `node` is synced before proceeding.
 
