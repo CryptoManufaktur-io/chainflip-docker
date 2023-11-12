@@ -12,6 +12,9 @@ Chainflip node in docker compose
 
 Read this alongside the official [Chainflip docs](https://docs.chainflip.io/perseverance/validator-setup/keys)
 
+Make sure the `keys` directory is owned by uid `1000`. This will already be the default if you have
+just one user in Debian/Ubuntu: `sudo chown 1000:1000 ./keys`
+
 Generate the keys with `./flipd cmd run --rm cli generate-keys --path /etc/chainflip/keys`.
 
 **Make sure to back up your Seed Phrase and make a note of the public keys and account ID. You will need the Seed Phrase if you ever need to restore your node or recover your funds if you lose access to the node. DO NOT LOSE THIS.**
