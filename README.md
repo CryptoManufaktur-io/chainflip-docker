@@ -27,7 +27,7 @@ Take special note of the Validator Account ID beginning with cF. This is the ID 
 
 ## Sync node
 
-`./flipd up` or `docker compose up -d`. Check logs of the node with `./flipd logs -f node`. The `engine` service will
+Start the Chainflip node with `./flipd up`. Check logs of the node with `./flipd logs -f node`. The `engine` service will
 print "wait" messages until `node` is synced.
 
 ## Funding and bidding
@@ -61,15 +61,14 @@ central traefik/prometheus/promtail stack.
 
 ## Updating chainflip
 
-If there is a runtime upgrade, `nano .env` and add `:old-engine.yml` to `COMPOSE_FILE`.
+If there is a runtime upgrade - that is, Chainflip instructed you to run the old engine alongside a new one - first
+`./flipd update`, then `nano .env` and add `:old-engine.yml` to `COMPOSE_FILE`. If you need a different old engine tag
+than configured, set it now.
 
-If you are using a specific version tag, instead of latest, `nano .env` and set the desired new version tag.
+If you are using specific version tags for node and engine, instead of latest, `nano .env` and set the desired new
+version tags, then `./flipd update` to pull the new versions.
 
-`./flipd update` to pull the new version.
-
-If you're not using whatever Chainflip Docker thinks the old engine tag is, adjust it in `.env` now.
-
-`./flipd up` to start using it
+`./flipd up` to restart node and engine on the new versions.
 
 After the runtime upgrade, `nano .env` again and remove `:old-engine.yml` from `COMPOSE_FILE`, then `./flipd up` to
 stop running the old engine.
