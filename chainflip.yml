@@ -36,8 +36,6 @@ services:
       - paritydb
       - --sync
       - ${SYNC_MODE}
-      - --execution
-      - native
     labels:
       - metrics.scrape=true
       - metrics.path=/metrics
