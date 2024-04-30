@@ -21,7 +21,7 @@ services:
     build:
       context: ./prometheus
     image: prometheus:local
-    pull_policy: build
+    pull_policy: never
     volumes:
       - prom-data:/prometheus
       - ./prometheus/custom-prom.yml:/etc/prometheus/custom-prom.yml:ro
