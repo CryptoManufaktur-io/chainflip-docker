@@ -6,7 +6,8 @@ Chainflip node in Docker Compose
 
 `./flipd install` can be used to install docker-ce and Docker Compose, if they aren't already installed
 
-`cp default.env .env` and adjust variables such as the version tags, `HOST_IP` and `ETH_RPC` as well as `ETH_WS` URLs.
+`cp default.env .env` and adjust variables such as the version tags, `HOST_IP` and `ETH_RPC` as well as `ETH_WS` URLs,
+as well as the `ARB_RPC` and `ARB_WS` variables.
 
 ## Generate keys
 
@@ -63,20 +64,12 @@ central traefik/prometheus/promtail stack.
 
 ## Updating Chainflip
 
-Run `./flipd update` to refresh the configuration for `old-engine.yml`, see below. This also pulls fresh node and
-engine versions if the `latest` tag is being used.
-
 If you are using specific version tags for node and engine, instead of latest, `nano .env` and set the desired new
 version tags.
 
-If there is a runtime upgrade - that is, Chainflip instructed you to run the old engine alongside a new one -
-`nano .env,` add `:old-engine.yml` to `COMPOSE_FILE`. If you need a different old engine tag than
-configured, set it now.
+`./flipd update` to pull in the new versions.
 
 `./flipd up` to restart node and engine on the new versions.
-
-After the runtime upgrade, `nano .env` again and remove `:old-engine.yml` from `COMPOSE_FILE`, then `./flipd up` to
-stop running the old engine.
 
 ## Restoring from backup
 
