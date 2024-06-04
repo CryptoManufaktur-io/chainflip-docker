@@ -91,6 +91,16 @@ services:
       - ${ETH_BACKUP_WS}
       - --eth.private_key_file
       - /etc/chainflip/keys/ethereum_key_file
+      - --arb.rpc.http_endpoint
+      - ${ARB_RPC}
+      - --arb.rpc.ws_endpoint
+      - ${ARB_WS}
+      - --arb.backup_rpc.http_endpoint
+      - ${ARB_BACKUP_RPC}
+      - --arb.backup_rpc.ws_endpoint
+      - ${ARB_BACKUP_WS}
+      - --arb.private_key_file
+      - /etc/chainflip/keys/ethereum_key_file
       - --health_check.hostname
       - 0.0.0.0
       - --health_check.port
