@@ -135,16 +135,6 @@ services:
       - /etc/localtime:/etc/localtime:ro
     entrypoint:
       - /usr/local/bin/chainflip-cli
-      - --eth.rpc.http_endpoint
-      - ${ETH_RPC}
-      - --eth.rpc.ws_endpoint
-      - ${ETH_WS}
-      - --eth.backup_rpc.http_endpoint
-      - ${ETH_BACKUP_RPC}
-      - --eth.backup_rpc.ws_endpoint
-      - ${ETH_BACKUP_WS}
-      - --eth.private_key_file
-      - /etc/chainflip/keys/ethereum_key_file
       - --state_chain.signing_key_file
       - /etc/chainflip/keys/signing_key_file
       - --state_chain.ws_endpoint
