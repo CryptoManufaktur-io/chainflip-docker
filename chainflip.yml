@@ -40,6 +40,7 @@ services:
       - metrics.scrape=true
       - metrics.path=/metrics
       - metrics.port=9615
+      - metrics.network=chainflip
 
   engine:
     restart: "unless-stopped"
@@ -125,6 +126,7 @@ services:
       - metrics.scrape=true
       - metrics.path=/metrics
       - metrics.port=5566
+      - metrics.network=chainflip
 
   cli:
     restart: "no"
