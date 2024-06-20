@@ -76,4 +76,4 @@ version tags.
 After you restore the `keys` directory from backup and sync the node and engine again, run
 `./flipd cmd run --rm cli rotate`. This is necessary after restore.
 
-This is Chainflip Docker v2.0.0
+This is Chainflip Docker v2.0.1
