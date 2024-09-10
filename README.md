@@ -7,7 +7,7 @@ Chainflip node in Docker Compose
 `./flipd install` can be used to install docker-ce and Docker Compose, if they aren't already installed
 
 `cp default.env .env` and adjust variables such as the version tags, `HOST_IP` and `ETH_RPC` as well as `ETH_WS` URLs,
-as well as the `ARB_RPC` and `ARB_WS` variables. For `SOL_RPC` and `SOL_WS`, use an RPC provider.
+as well as the `ARB_RPC` and `ARB_WS` variables. For `SOL_RPC`, use an RPC provider.
 
 ## Generate keys
 
@@ -76,4 +76,4 @@ version tags.
 After you restore the `keys` directory from backup and sync the node and engine again, run
 `./flipd cmd run --rm cli rotate`. This is necessary after restore.
 
-This is Chainflip Docker v3.0.0
+This is Chainflip Docker v4.0.0
