@@ -102,14 +102,10 @@ services:
       - ${ARB_BACKUP_WS}
       - --arb.private_key_file
       - /etc/chainflip/keys/ethereum_key_file
-      - --hub.rpc.http_endpoint
-      - ${HUB_RPC}
-      - --hub.rpc.ws_endpoint
-      - ${HUB_WS}
-      - --hub.backup_rpc.http_endpoint
-      - ${HUB_BACKUP_RPC}
-      - --hub.backup_rpc.ws_endpoint
-      - ${HUB_BACKUP_WS}
+      - --hub.rpc.http_endpoint=${HUB_RPC}
+      - --hub.rpc.ws_endpoint=${HUB_WS}
+      - --hub.backup_rpc.http_endpoint=${HUB_BACKUP_RPC}
+      - --hub.backup_rpc.ws_endpoint=${HUB_BACKUP_WS}
       - --sol.rpc.http_endpoint
       - ${SOL_RPC}
       - --sol.backup_rpc.http_endpoint
