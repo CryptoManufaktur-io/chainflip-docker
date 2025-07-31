@@ -33,9 +33,10 @@ services:
       - --log
       - ${LOG_LEVEL}
       - --database
-      - paritydb
+      - ${DB_TYPE}
       - --sync
       - ${SYNC_MODE}
+    command: ${NODE_EXTRAS}
     labels:
       - metrics.scrape=true
       - metrics.path=/metrics
@@ -134,6 +135,7 @@ services:
       - 0.0.0.0
       - --prometheus.port
       - "5566"
+    command: ${ENGINE_EXTRAS}
     labels:
       - metrics.scrape=true
       - metrics.path=/metrics
