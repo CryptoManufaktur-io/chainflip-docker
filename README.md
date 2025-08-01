@@ -1,3 +1,7 @@
+# Archived Repo
+
+This repo has been archived. A fork of it is being maintained at https://github.com/0xSleipnir/chainflip-docker
+
 # Chainflip Docker
 
 Chainflip node in Docker Compose
